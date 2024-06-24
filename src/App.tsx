@@ -1,13 +1,13 @@
-
-import './App.css'
+import Home from './pages/Home';
+import { GlobalStyle } from './shared/GlobalStyle.styled';
 
 function App() {
-
   return (
     <>
-   <h2>N5 Challenge</h2>
+      <GlobalStyle />
+      <Home />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
