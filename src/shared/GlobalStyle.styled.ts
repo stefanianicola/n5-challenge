@@ -2,10 +2,7 @@ import { createGlobalStyle } from "styled-components"
 
 
 export const GlobalStyle = createGlobalStyle`
-html{
-  font-family: Inter, sans-serif;
-  font-size: 10px;
-}
+
 * {
     margin: 0;
     padding: 0;

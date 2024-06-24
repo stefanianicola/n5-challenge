@@ -1,21 +1,16 @@
+import Header from '../components/Header';
+import ListItems from '../components/ListItems';
 import { useProducts } from '../context/CartContext';
 import { ProductI } from '../interfaces/product.interface';
+import { AppRouter } from '../routing/router';
 
 function Home() {
   const { products } = useProducts();
 
-  console.log(products);
-
   return (
     <>
-      <h2>Home Page</h2>
-      {products?.map((product: ProductI) => (
-        <div>
-          <p>{product.name}</p>
-          <p>{product.amount}</p>
-          <p>{product.price}</p>
-        </div>
-      ))}
+      <Header />
+      <AppRouter />
     </>
   );
 }
