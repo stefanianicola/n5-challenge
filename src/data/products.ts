@@ -1,5 +1,5 @@
 
-export const products = [
+export const productData = [
     {
         "name": "Leche",
         "price": 75000,
