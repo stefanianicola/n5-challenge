@@ -1,6 +1,7 @@
+import { primaryColor } from './../../shared/Variables.styled';
 import styled from "styled-components";
 
-interface CardProps {
+export interface CardProps {
     colortop?: string | string[];
     items?: 'start' | 'center' | 'end',
 }
@@ -36,13 +37,13 @@ position: relative;
 background-color: ${(props) => props.theme.cardBg};
 display: flex;
 flex-direction: column;
-border-radius: 4px;
-border: 1px solid red;
+border-radius: 10px;
+border: 1px solid #f2f2f2;
 align-items: ${(props) => props.items || 'initial'};
 cursor: pointer;
 transition: background-color 0.3s ease-in-out;
 align-self: start;
-padding: 3rem;
+padding: 1rem;
 &:hover {
     background-color: ${(props) => props.theme.hoverCardBg};
 }
@@ -52,8 +53,21 @@ padding: 3rem;
 
 export const CardTitle = styled.h5`
 font-weight: 700;
+padding-bottom: 1rem;
+border-bottom: 1px solid #f2f2f2;
 `;
 
 export const CardText = styled.p`
-color: green;
+color: #545258 ;
+`;
+
+export const CardButton = styled.button<{ buttonColor?: string }>`
+border-radius: 10px;
+border: 1px solid transparent;
+padding: 0.5rem;
+background-color: ${(props) => props.buttonColor || primaryColor.limeGreen};
+color: #f2f2f2;
+&:disabled{
+background-color: #c6c6c6
+}
 `;

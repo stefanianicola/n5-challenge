@@ -1,14 +1,17 @@
 import { ProductI } from '../../interfaces/product.interface';
 import { CardBody, CardText, CardTitle } from './Card.styled';
+import Counter from './Counter';
 
-function Card({ product }: { product: ProductI }) {
+const Card = ({ product }: { product: ProductI }) => {
   return (
     <CardBody>
       <CardTitle>{product.name}</CardTitle>
-      <CardText>{product.price}</CardText>
-      <CardText>{product.amount}</CardText>
+      <CardText>Amount: {product.amount}</CardText>
+      <CardText>${product.price}</CardText>
+
+      <Counter product={product} />
     </CardBody>
   );
-}
+};
 
 export default Card;
