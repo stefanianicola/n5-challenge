@@ -34,7 +34,7 @@ export const CardBody = styled.div<CardProps>`
 width: 100%;
 z-index: 20;
 position: relative;
-background-color: ${(props) => props.theme.cardBg};
+
 display: flex;
 flex-direction: column;
 border-radius: 10px;
@@ -44,9 +44,7 @@ cursor: pointer;
 transition: background-color 0.3s ease-in-out;
 align-self: start;
 padding: 1rem;
-&:hover {
-    background-color: ${(props) => props.theme.hoverCardBg};
-}
+
    
 `;
 
@@ -67,6 +65,7 @@ border: 1px solid transparent;
 padding: 0.5rem;
 background-color: ${(props) => props.buttonColor || primaryColor.limeGreen};
 color: #f2f2f2;
+cursor: pointer;
 &:disabled{
 background-color: #c6c6c6
 }

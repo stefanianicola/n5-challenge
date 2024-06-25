@@ -1,31 +1,52 @@
-import { useState } from 'react';
-import { ProductI } from '../../interfaces/product.interface';
+import { useEffect, useState } from 'react';
 import { CardButton } from './Card.styled';
-import { useNavigate } from 'react-router-dom';
+import { ProductI } from '../../interfaces/product.interface';
 
-const Counter = ({ product }: { product: ProductI }) => {
+interface CounterProps {
+  onAdd: (count: number) => void;
+  product: ProductI;
+}
+
+const Counter: React.FC<CounterProps> = ({ onAdd, product }) => {
   const [amountAdded, setAmountAdded] = useState(0);
-  const navigate = useNavigate();
+  // Obtener la lista existente de localStorage o inicializar una nueva
+  const existingList = JSON.parse(localStorage.getItem('listAdded') || '[]');
+
+  useEffect(() => {
+    if (existingList.length > 0) {
+      for (let i of existingList) {
+        if (product.id === i.productId) setAmountAdded(i.count);
+      }
+    }
+  }, []);
 
   //increment value
-  const handleAddValue = (product: ProductI) => {
-    if (product.amount <= amountAdded) {
-      alert('no hay mas stock');
-    } else {
+  const handleAddValue = () => {
+    if (product.amount <= amountAdded) alert('No hay mas en stock!');
+    else {
       setAmountAdded(amountAdded + 1);
     }
   };
   //decrement value
   const handleRemoveValue = () => {
-    if (amountAdded === 0) {
-      alert('no hay mas stock en el carrito');
-    } else {
-      setAmountAdded(amountAdded - 1);
-    }
+    if (amountAdded === 0) alert('no hay mas stock en el carrito');
+    else setAmountAdded(amountAdded - 1);
   };
-  //redirect to cart
-  const addToCart = () => {
-    navigate('/cart');
+
+  //envia la cantidad seleccionada
+  const handlerOnAdd = () => {
+    // Crear un nuevo objeto para el producto actual
+    const newEntry = {
+      productId: product.id,
+      count: amountAdded,
+    };
+
+    // Actualizar la lista existente con el nuevo objeto
+    const updatedList = [...existingList, newEntry];
+    console.log(updatedList);
+    // Guardar la lista actualizada en localStorage
+    localStorage.setItem('listAdded', JSON.stringify(updatedList));
+    onAdd(amountAdded);
   };
 
   return (
@@ -50,16 +71,16 @@ const Counter = ({ product }: { product: ProductI }) => {
           className="btn btn-outline-secondary"
           type="button"
           id="button-addon1"
-          onClick={() => handleAddValue(product)}
+          onClick={handleAddValue}
         >
           +
         </button>
       </div>
 
       {amountAdded > 0 ? (
-        <CardButton onClick={addToCart}>Add to cart</CardButton>
+        <CardButton onClick={handlerOnAdd}>Add to cart</CardButton>
       ) : (
-        <CardButton disabled onClick={addToCart}>
+        <CardButton disabled onClick={handlerOnAdd}>
           Add to cart
         </CardButton>
       )}
