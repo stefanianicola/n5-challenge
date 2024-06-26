@@ -3,6 +3,7 @@ import { useProducts } from '../context/CartContext';
 import { Alert, Button, Container } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CartItem from './CartItem';
+import { useEffect } from 'react';
 
 function Cart() {
   const contextProduct = useProducts();

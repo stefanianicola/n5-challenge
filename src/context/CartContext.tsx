@@ -1,4 +1,10 @@
-import { useState, createContext, ReactNode, useContext } from 'react';
+import {
+  useState,
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+} from 'react';
 
 import { productData } from '../data/products';
 import { ProductI } from '../interfaces/product.interface';
@@ -17,6 +23,7 @@ type CartContextType = {
   setItem: React.Dispatch<React.SetStateAction<number>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  existingList: ProductI[];
 };
 
 const CartContext = createContext<CartContextType>({
@@ -33,6 +40,7 @@ const CartContext = createContext<CartContextType>({
   setItem: () => 0,
   loading: false,
   setLoading: () => false,
+  existingList: [],
 });
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
@@ -43,6 +51,15 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
   const [total, setTotal] = useState<number>(0);
   const [item, setItem] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
+
+  // Obtener la lista existente de localStorage o inicializar una nueva
+  let existingList = JSON.parse(localStorage.getItem('listAdded')!) || [];
+
+  useEffect(() => {
+    if (existingList.length > 0) {
+      setList(existingList);
+    }
+  }, []);
 
   const addList = (id: number, name: string, amount: number, price: number) => {
     let aux = list;
@@ -80,8 +97,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const removeItem = (id: number) => {
-    removeItemFromLS(id);
-
     let dataAux = [...list];
     let items = item;
     let suma = total;
@@ -97,18 +112,14 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         );
         setProducts(newProductList);
         setItem(items);
+
         setTotal(Number(suma));
       }
     }
 
     setList(dataAux);
-  };
-
-  const removeItemFromLS = (id: number) => {
-    const localSt = JSON.parse(localStorage.getItem('listAdded')!);
-    const newStorage = localSt.filter((item: any) => item.productId !== id);
     localStorage.removeItem('listAdded');
-    localStorage.setItem('listAdded', JSON.stringify(newStorage));
+    localStorage.setItem('listAdded', JSON.stringify(dataAux));
   };
 
   const totalCompra = () => {
@@ -155,6 +166,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         setItem,
         loading,
         setLoading,
+        existingList,
       }}
     >
       {children}

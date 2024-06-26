@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CardButton } from './Card/Card.styled';
 import { ProductI } from '../interfaces/product.interface';
+import { useProducts } from '../context/CartContext';
 
 interface CounterProps {
   onAdd: (count: number) => void;
@@ -9,13 +10,12 @@ interface CounterProps {
 
 const Counter: React.FC<CounterProps> = ({ onAdd, product }) => {
   const [amountAdded, setAmountAdded] = useState(0);
-  // Obtener la lista existente de localStorage o inicializar una nueva
-  const existingList = JSON.parse(localStorage.getItem('listAdded') || '[]');
+  const { existingList } = useProducts();
 
   useEffect(() => {
     if (existingList.length > 0) {
       for (let i of existingList) {
-        if (product.id === i.productId) setAmountAdded(i.count);
+        if (product.id === i.id) setAmountAdded(i.amount);
       }
     }
   }, []);
@@ -37,8 +37,10 @@ const Counter: React.FC<CounterProps> = ({ onAdd, product }) => {
   const handlerOnAdd = () => {
     // Crear un nuevo objeto para el producto actual
     const newEntry = {
-      productId: product.id,
-      count: amountAdded,
+      id: product.id,
+      amount: amountAdded,
+      price: product.price,
+      name: product.name,
     };
 
     // Actualizar la lista existente con el nuevo objeto
@@ -60,7 +62,7 @@ const Counter: React.FC<CounterProps> = ({ onAdd, product }) => {
           -
         </button>
         <input
-          type="text"
+          type="number"
           className="form-control"
           placeholder={amountAdded.toString()}
           aria-label="Example text with button addon"

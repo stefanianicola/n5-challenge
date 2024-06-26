@@ -2,9 +2,17 @@ import { useProducts } from '../context/CartContext';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { ProductI } from '../interfaces/product.interface';
 import { Button, Col } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
 
 function CartItem({ item }: { item: ProductI }) {
   const contextProduct = useProducts();
+  const [itemTotal, setItemTotal] = useState(0);
+
+  useEffect(() => {
+    const subTotal = item.price * item.amount;
+    setItemTotal(subTotal);
+    contextProduct.totalCompra();
+  }, []);
 
   return (
     <ListGroup.Item
@@ -21,7 +29,7 @@ function CartItem({ item }: { item: ProductI }) {
           <span className="mx-2">{item.amount}</span>
         </p>
 
-        <p>${item.price * item.amount}</p>
+        <p>${itemTotal.toFixed(2)}</p>
 
         <Button
           variant="danger"
