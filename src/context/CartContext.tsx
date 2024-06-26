@@ -24,6 +24,11 @@ type CartContextType = {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   existingList: ProductI[];
+  finalizarCompra: () => void;
+  successBuy: boolean;
+  setSuccessBuy: React.Dispatch<React.SetStateAction<boolean>>;
+  show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CartContext = createContext<CartContextType>({
@@ -41,6 +46,11 @@ const CartContext = createContext<CartContextType>({
   loading: false,
   setLoading: () => false,
   existingList: [],
+  finalizarCompra: () => [],
+  successBuy: false,
+  setSuccessBuy: () => false,
+  show: false,
+  setShow: () => false,
 });
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
@@ -51,7 +61,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
   const [total, setTotal] = useState<number>(0);
   const [item, setItem] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [successBuy, setSuccessBuy] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
   // Obtener la lista existente de localStorage o inicializar una nueva
   let existingList = JSON.parse(localStorage.getItem('listAdded')!) || [];
 
@@ -118,6 +129,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     }
 
     setList(dataAux);
+    setShow(false);
     localStorage.removeItem('listAdded');
     localStorage.setItem('listAdded', JSON.stringify(dataAux));
   };
@@ -150,6 +162,12 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     });
     setItem(items);
   };
+
+  const finalizarCompra = () => {
+    setList([]);
+    localStorage.removeItem('listAdded');
+    setSuccessBuy(true);
+  };
   return (
     <CartContext.Provider
       value={{
@@ -167,6 +185,11 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         loading,
         setLoading,
         existingList,
+        finalizarCompra,
+        successBuy,
+        setSuccessBuy,
+        show,
+        setShow,
       }}
     >
       {children}

@@ -3,38 +3,43 @@ import { useProducts } from '../context/CartContext';
 import { Alert, Button, Container } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CartItem from './CartItem';
-import { useEffect } from 'react';
+import CartTotal from './CartTotal';
 
 function Cart() {
-  const contextProduct = useProducts();
+  const { list, successBuy, setSuccessBuy } = useProducts();
 
   return (
     <Container>
-      {contextProduct.list.length > 0 ? (
-        <div className="my-4">
-          <h4>Compra Pendiente de confirmación</h4>
-          <hr />
-          <ListGroup as="ul" variant="flush">
-            {contextProduct.list.map((l) => (
-              <CartItem key={l.id} item={l} />
-            ))}
-          </ListGroup>
+      {!successBuy ? (
+        list.length > 0 ? (
+          <div className="my-4">
+            <h4>Compra Pendiente de confirmación</h4>
+            <hr />
+            <ListGroup as="ul" variant="flush">
+              {list.map((l) => (
+                <CartItem key={l.id} item={l} />
+              ))}
+            </ListGroup>
 
-          <div className="d-flex flex-column align-items-end">
-            <div className="d-flex flex-row ">
-              <p className="mx-4 ">Total de tu compra:</p>
-              <p className="fw-bold">${contextProduct.total}</p>
-            </div>
-
-            <Button variant="danger" onClick={contextProduct.clear}>
-              Cancelar compra
-            </Button>
+            <CartTotal />
           </div>
-        </div>
+        ) : (
+          <Alert variant={'warning'}>
+            No tienes elementos en el carrito!!
+            <Alert.Link as={Link} to="/" className="mx-3">
+              Volver al inicio.
+            </Alert.Link>
+          </Alert>
+        )
       ) : (
-        <Alert variant={'warning'}>
-          No tienes elementos en el carrito!!
-          <Alert.Link as={Link} to="/" className="mx-3">
+        <Alert variant={'info'}>
+          Tu compra fue realizada con exito!!
+          <Alert.Link
+            as={Link}
+            to="/"
+            className="mx-3"
+            onClick={() => setSuccessBuy(false)}
+          >
             Volver al inicio.
           </Alert.Link>
         </Alert>
