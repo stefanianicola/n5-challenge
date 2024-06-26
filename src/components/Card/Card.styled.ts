@@ -9,7 +9,6 @@ export interface CardProps {
 //wrapper  List
 export const ListCardWrapper = styled.div`
 padding: 2rem 0;
-margin: 0 2rem;
 display: grid;
 gap: 3.5rem;
 grid-template-columns: repeat(1, 1fr); /* default, 1 column */

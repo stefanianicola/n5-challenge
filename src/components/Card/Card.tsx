@@ -1,7 +1,7 @@
 import { useProducts } from '../../context/CartContext';
 import { ProductI } from '../../interfaces/product.interface';
 import { CardBody, CardText, CardTitle } from './Card.styled';
-import Counter from './Counter';
+import Counter from '../Counter';
 
 const Card = ({ product }: { product: ProductI }) => {
   const contextProduct = useProducts();

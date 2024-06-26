@@ -1,39 +1,25 @@
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
+import { useProducts } from '../context/CartContext';
 
 function Header() {
+  const { totalCompra } = useProducts();
   return (
-    <nav className="navbar navbar-expand-lg ">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="/">
-          N5 Challenge
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">
-                Cart
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <Navbar>
+      <Container>
+        <Navbar.Brand href="/">N5 Challenge</Navbar.Brand>
+        <Nav className="me-auto">
+          <Nav.Link as={Link} to="/">
+            Home
+          </Nav.Link>
+          <Nav.Link as={Link} to="/cart" onClick={totalCompra}>
+            Cart
+          </Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
   );
 }
 

@@ -1,3 +1,4 @@
+import { Container } from 'react-bootstrap';
 import { useProducts } from '../context/CartContext';
 import { ProductI } from '../interfaces/product.interface';
 import Card from './Card/Card';
@@ -7,11 +8,13 @@ function ListItems() {
   const { products } = useProducts();
 
   return (
-    <ListCardWrapper>
-      {products.map((product: ProductI) => (
-        <Card key={product.id} product={product} />
-      ))}
-    </ListCardWrapper>
+    <Container>
+      <ListCardWrapper>
+        {products.map((product: ProductI) => (
+          <Card key={product.id} product={product} />
+        ))}
+      </ListCardWrapper>
+    </Container>
   );
 }
 

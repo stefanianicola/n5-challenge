@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { CardButton } from './Card.styled';
-import { ProductI } from '../../interfaces/product.interface';
+import { CardButton } from './Card/Card.styled';
+import { ProductI } from '../interfaces/product.interface';
 
 interface CounterProps {
   onAdd: (count: number) => void;
@@ -43,7 +43,6 @@ const Counter: React.FC<CounterProps> = ({ onAdd, product }) => {
 
     // Actualizar la lista existente con el nuevo objeto
     const updatedList = [...existingList, newEntry];
-    console.log(updatedList);
     // Guardar la lista actualizada en localStorage
     localStorage.setItem('listAdded', JSON.stringify(updatedList));
     onAdd(amountAdded);

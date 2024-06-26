@@ -51,6 +51,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
       if (a.id === id) {
         isInCart = true;
         a.amount = a.amount + amount;
+
         setList(aux);
       }
     });
@@ -64,15 +65,23 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
           price: price,
         },
       ]);
+
+    const newProductList = products.map((item: ProductI) =>
+      item.id === id ? { ...item, amount: item.amount - amount } : item
+    );
+    setProducts(newProductList);
   };
 
   const clear = () => {
     setList([]);
     setItem(0);
+    setProducts(productData);
     localStorage.removeItem('listAdded');
   };
 
   const removeItem = (id: number) => {
+    removeItemFromLS(id);
+
     let dataAux = [...list];
     let items = item;
     let suma = total;
@@ -81,13 +90,25 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         dataAux.splice(i, 1);
         items = items - list[i].amount;
         suma = Number(suma - list[i].price * list[i].amount);
+        const newProductList = products.map((item: ProductI) =>
+          item.id === id
+            ? { ...item, amount: item.amount + list[i].amount }
+            : item
+        );
+        setProducts(newProductList);
         setItem(items);
         setTotal(Number(suma));
       }
     }
 
     setList(dataAux);
-    // totalCompra();
+  };
+
+  const removeItemFromLS = (id: number) => {
+    const localSt = JSON.parse(localStorage.getItem('listAdded')!);
+    const newStorage = localSt.filter((item: any) => item.productId !== id);
+    localStorage.removeItem('listAdded');
+    localStorage.setItem('listAdded', JSON.stringify(newStorage));
   };
 
   const totalCompra = () => {
@@ -101,7 +122,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         suma = Number(suma) + Number(a.price);
       }
     });
-
     setTotal(Number(suma));
     addItems();
   };
