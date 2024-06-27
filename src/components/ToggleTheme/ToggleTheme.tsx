@@ -8,8 +8,9 @@ interface ThemeProps {
   toggleTheme?: (value: boolean) => void;
 }
 
-const ToggleTheme: React.FC<ThemeProps> = ({ toggleTheme }) => {
+const ToggleTheme: React.FC<ThemeProps> = ({ toggleTheme, themeSt }) => {
   const [checked, setChecked] = useState<boolean>(false);
+  console.log(themeSt);
   const handleChange = () => {
     setChecked(!checked);
     toggleTheme !== undefined && toggleTheme(checked);
@@ -17,7 +18,7 @@ const ToggleTheme: React.FC<ThemeProps> = ({ toggleTheme }) => {
 
   return (
     <ToggleButton onClick={handleChange}>
-      {checked ? (
+      {themeSt === 'darkTheme' ? (
         <FontAwesomeIcon icon={faMoon} />
       ) : (
         <FontAwesomeIcon icon={faSun} />

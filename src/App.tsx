@@ -10,7 +10,7 @@ function App() {
   const [theme, setTheme] = useState(
     JSON.parse(localStorage.getItem('theme')!) || lightTheme
   );
-  //localStorage.removeItem('theme');
+  const [themeName, setThemeName] = useState<string>('lightTheme');
 
   useEffect(() => {
     localStorage.setItem('theme', JSON.stringify(theme));
@@ -18,13 +18,14 @@ function App() {
 
   const toggleTheme = () => {
     setTheme(theme === lightTheme ? darkTheme : lightTheme);
+    setThemeName(themeName === 'lightTheme' ? 'darkTheme' : 'lightTheme');
   };
 
   return (
     <CartProvider>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <ToggleTheme toggleTheme={toggleTheme} />
+        <ToggleTheme toggleTheme={toggleTheme} themeSt={themeName} />
         <Home />
       </ThemeProvider>
     </CartProvider>

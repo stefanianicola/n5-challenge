@@ -1,24 +1,16 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
-import { useProducts } from '../context/CartContext';
-import styled from 'styled-components';
-
-export const NavbarWrapper = styled(Navbar)`
-  background-color: ${(props) => props.theme.topBgPattern};
-  color: ${(props) => props.theme.primaryText};
-`;
-
-export const StyledNavLink = styled(Nav.Link)`
-  color: ${(props) => props.theme.primaryText} !important;
-`;
-export const StyledNavBrand = styled(Navbar.Brand)`
-  color: ${(props) => props.theme.primaryText} !important;
-`;
+import { useProducts } from '../../context/CartContext';
+import {
+  NavbarWrapper,
+  StyledNavLink,
+  StyledNavBrand,
+  StyledBadge,
+} from './Header.styled';
 
 function Header() {
-  const { totalCompra } = useProducts();
+  const { totalCompra, list } = useProducts();
   return (
     <NavbarWrapper>
       <Container>
@@ -34,6 +26,12 @@ function Header() {
             onClick={totalCompra}
           >
             Cart
+            {list.length > 0 && (
+              <StyledBadge bg="danger">{list.length}</StyledBadge>
+            )}
+          </StyledNavLink>
+          <StyledNavLink as={Link} className="nav-link" to="/add-item">
+            Add New
           </StyledNavLink>
         </Nav>
       </Container>
