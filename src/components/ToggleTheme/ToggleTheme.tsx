@@ -10,7 +10,7 @@ interface ThemeProps {
 
 const ToggleTheme: React.FC<ThemeProps> = ({ toggleTheme, themeSt }) => {
   const [checked, setChecked] = useState<boolean>(false);
-  console.log(themeSt);
+
   const handleChange = () => {
     setChecked(!checked);
     toggleTheme !== undefined && toggleTheme(checked);

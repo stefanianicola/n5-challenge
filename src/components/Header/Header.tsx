@@ -33,6 +33,9 @@ function Header() {
           <StyledNavLink as={Link} className="nav-link" to="/add-item">
             Add New
           </StyledNavLink>
+          <StyledNavLink as={Link} className="nav-link" to="/logica">
+            Test Logica
+          </StyledNavLink>
         </Nav>
       </Container>
     </NavbarWrapper>

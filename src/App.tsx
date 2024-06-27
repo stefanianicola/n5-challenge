@@ -14,6 +14,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('theme', JSON.stringify(theme));
+    setThemeName(theme !== lightTheme ? 'darkTheme' : 'lightTheme');
   }, [theme]);
 
   const toggleTheme = () => {
