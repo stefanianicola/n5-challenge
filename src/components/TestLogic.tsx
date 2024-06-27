@@ -35,7 +35,6 @@ function TestLogic() {
   const handleRevert = (e: any) => {
     e.preventDefault();
     reverse(createPalabra);
-    console.log(palabra);
   };
 
   return (
