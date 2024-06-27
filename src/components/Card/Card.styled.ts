@@ -33,7 +33,6 @@ export const CardBody = styled.div<CardProps>`
 width: 100%;
 z-index: 20;
 position: relative;
-
 display: flex;
 flex-direction: column;
 border-radius: 10px;
@@ -43,7 +42,9 @@ cursor: pointer;
 transition: background-color 0.3s ease-in-out;
 align-self: start;
 padding: 1rem;
-
+&:hover {
+    background-color: ${(props) => props.theme.hoverCardBg};
+}
    
 `;
 
@@ -52,10 +53,11 @@ export const CardTitle = styled.h5`
 font-weight: 700;
 padding-bottom: 1rem;
 border-bottom: 1px solid #f2f2f2;
+color: ${(props) => props.theme.primaryText} ;
 `;
 
 export const CardText = styled.p`
-color: #545258 ;
+color: ${(props) => props.theme.primaryText} ;
 `;
 
 export const CardButton = styled.button<{ buttonColor?: string }>`

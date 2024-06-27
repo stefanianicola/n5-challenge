@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useProducts } from '../context/CartContext';
-import { Alert, Button, Container } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CartItem from './CartItem';
 import CartTotal from './CartTotal';
@@ -24,7 +24,7 @@ function Cart() {
             <CartTotal />
           </div>
         ) : (
-          <Alert variant={'warning'}>
+          <Alert variant={'warning'} className="my-5">
             No tienes elementos en el carrito!!
             <Alert.Link as={Link} to="/" className="mx-3">
               Volver al inicio.
@@ -32,7 +32,7 @@ function Cart() {
           </Alert>
         )
       ) : (
-        <Alert variant={'info'}>
+        <Alert variant={'info'} className="my-5">
           Tu compra fue realizada con exito!!
           <Alert.Link
             as={Link}

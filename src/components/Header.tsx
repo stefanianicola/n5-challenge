@@ -3,23 +3,41 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../context/CartContext';
+import styled from 'styled-components';
+
+export const NavbarWrapper = styled(Navbar)`
+  background-color: ${(props) => props.theme.topBgPattern};
+  color: ${(props) => props.theme.primaryText};
+`;
+
+export const StyledNavLink = styled(Nav.Link)`
+  color: ${(props) => props.theme.primaryText} !important;
+`;
+export const StyledNavBrand = styled(Navbar.Brand)`
+  color: ${(props) => props.theme.primaryText} !important;
+`;
 
 function Header() {
   const { totalCompra } = useProducts();
   return (
-    <Navbar>
+    <NavbarWrapper>
       <Container>
-        <Navbar.Brand href="/">N5 Challenge</Navbar.Brand>
+        <StyledNavBrand href="/">N5 Challenge</StyledNavBrand>
         <Nav className="me-auto">
-          <Nav.Link as={Link} to="/">
+          <StyledNavLink as={Link} className="nav-link" to="/">
             Home
-          </Nav.Link>
-          <Nav.Link as={Link} to="/cart" onClick={totalCompra}>
+          </StyledNavLink>
+          <StyledNavLink
+            as={Link}
+            className="nav-link"
+            to="/cart"
+            onClick={totalCompra}
+          >
             Cart
-          </Nav.Link>
+          </StyledNavLink>
         </Nav>
       </Container>
-    </Navbar>
+    </NavbarWrapper>
   );
 }
 
