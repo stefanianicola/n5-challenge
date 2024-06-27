@@ -5,7 +5,6 @@ const Home: React.FC = () => {
   return (
     <>
       <Header />
-
       <AppRouter />
     </>
   );

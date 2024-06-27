@@ -56,7 +56,7 @@ const CartContext = createContext<CartContextType>({
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [products, setProducts] = useState<ProductI[]>(productData);
+  const [products, setProducts] = useState<ProductI[]>([]);
   const [list, setList] = useState<ProductI[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [item, setItem] = useState<number>(0);
@@ -70,6 +70,9 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     if (existingList.length > 0) {
       setList(existingList);
     }
+    setTimeout(() => {
+      setProducts(productData);
+    }, 2000);
   }, []);
 
   const addList = (id: number, name: string, amount: number, price: number) => {
