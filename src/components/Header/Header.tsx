@@ -14,9 +14,9 @@ function Header() {
   return (
     <NavbarWrapper>
       <Container>
-        <StyledNavBrand href="/">N5 Challenge</StyledNavBrand>
+        <StyledNavBrand href="/home">N5 Challenge</StyledNavBrand>
         <Nav className="me-auto">
-          <StyledNavLink as={Link} className="nav-link" to="/">
+          <StyledNavLink as={Link} className="nav-link" to="/home">
             Home
           </StyledNavLink>
           <StyledNavLink
