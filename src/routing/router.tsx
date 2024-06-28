@@ -8,6 +8,7 @@ export const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<ListItems />} />
+      <Route path="/*" element={<ListItems />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/add-item" element={<AddNewItem />} />
       <Route path="/logica" element={<TestLogic />} />
