@@ -14,15 +14,15 @@ function Header() {
   return (
     <NavbarWrapper>
       <Container>
-        <StyledNavBrand href="/">N5 Challenge</StyledNavBrand>
+        <StyledNavBrand href="/n5-challenge">N5 Challenge</StyledNavBrand>
         <Nav className="me-auto">
-          <StyledNavLink as={Link} className="nav-link" to="/home">
+          <StyledNavLink as={Link} className="nav-link" to="/n5-challenge/home">
             Home
           </StyledNavLink>
           <StyledNavLink
             as={Link}
             className="nav-link"
-            to="/cart"
+            to="/n5-challenge/cart"
             onClick={totalCompra}
           >
             Cart
@@ -30,10 +30,18 @@ function Header() {
               <StyledBadge bg="danger">{list.length}</StyledBadge>
             )}
           </StyledNavLink>
-          <StyledNavLink as={Link} className="nav-link" to="/add-item">
+          <StyledNavLink
+            as={Link}
+            className="nav-link"
+            to="/n5-challenge/add-item"
+          >
             Add New
           </StyledNavLink>
-          <StyledNavLink as={Link} className="nav-link" to="/logica">
+          <StyledNavLink
+            as={Link}
+            className="nav-link"
+            to="/n5-challenge/logica"
+          >
             Test Logica
           </StyledNavLink>
         </Nav>

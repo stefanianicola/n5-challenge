@@ -7,11 +7,14 @@ import TestLogic from '../components/TestLogic';
 export const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/home" />} />
-      <Route path="/home" element={<ListItems />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/add-item" element={<AddNewItem />} />
-      <Route path="/logica" element={<TestLogic />} />
+      <Route
+        path="/n5-challenge"
+        element={<Navigate to="/n5-challenge/home" />}
+      />
+      <Route path="/n5-challenge/home" element={<ListItems />} />
+      <Route path="/n5-challenge/cart" element={<Cart />} />
+      <Route path="/n5-challenge/add-item" element={<AddNewItem />} />
+      <Route path="/n5-challenge/logica" element={<TestLogic />} />
     </Routes>
   );
 };
