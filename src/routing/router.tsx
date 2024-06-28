@@ -7,7 +7,10 @@ import TestLogic from '../components/TestLogic';
 export const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/n5-challenge" element={<Navigate to="/home" />} />
+      <Route
+        path="/n5-challenge"
+        element={<Navigate to="/n5-challenge/home" />}
+      />
       <Route path="/n5-challenge/home" element={<ListItems />} />
       <Route path="/n5-challenge/cart" element={<Cart />} />
       <Route path="/n5-challenge/add-item" element={<AddNewItem />} />
